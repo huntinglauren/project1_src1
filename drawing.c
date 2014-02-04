@@ -324,71 +324,59 @@ void draw_cone_tri_arrays(void) {
  */
 void draw_cone_tri_calc(double height, double radius, int base_tri) {
     /* ADD YOUR CODE HERE */
-    FILE *f = fopen("output.txt", "a+");
-    fprintf(f, "%s %d \n","base_tri: ", base_tri);
-    fprintf(f, "%s %f \n","height: ", height);
-    fprintf(f, "%s %f \n","radius: ", radius);
-    
 
-    if(base_tri == 0)
-        base_tri = 4;
-    if(radius == 0)
-        radius = 1;
-    height = 2.0;
-    float angle = 1.57079633;    // angle for base triangles
+    float angle = 2*M_PI / base_tri;    // angle for base triangles
 
     //int n = base_tri *2; 
     float curAngle = 0.0;           //number of total triangles 
     GLfloat x, y = 0.0;  
    
-    //blue
-
-    glBegin(GL_TRIANGLES);
-    glColor3f(2.0f, 0.0f,1.0f);
-    glVertex3f(0.0f,0.0f,0.0f);
-    x = radius * cosf(curAngle);
-    y = radius * sinf(curAngle);
-    fprintf(f, "%s %f \n","cos(0): ", cosf(curAngle));
-    fprintf(f, "%s %f \n","sin(0): ", sinf(curAngle));
-    fprintf(f, "%s %f \n","x: ", x);
-    fprintf(f, "%s %f \n","y: ", y);
-    glColor3f(0.0f, 0.0f,1.0f);
-    glVertex3f(radius,0.0f,0.0f);
-    curAngle += angle;
-    fprintf(f, "%s %f \n","new angle ", curAngle);
-    x = radius * cosf(curAngle);
-    y = radius * sinf(curAngle);
-    fprintf(f, "%s %f \n","cos(90): ", cosf(curAngle));
-    fprintf(f, "%s %f \n","sin(90): ", sinf(curAngle));
-    fprintf(f, "%s %f \n","x': ", x);
-    fprintf(f, "%s %f \n","y': ", y);
-    glColor3f(0.0f, 2.0f,1.0f);
-    glVertex3f(0.0f,radius,0.0f);
-
-    glEnd();
-
-    fclose(f);
-  
-   /* int i;   
-    for(i=0; i < 3; i++)
+    //Convert polar coordiantes to Cartesian
+    int i;
+    for(i = 0; i < base_tri; i++)// Base Triangles
     {
-        glBegin(GL_LINE_STRIP);
+        glBegin(GL_TRIANGLES);
+        glColor3f(0.0f, 0.0f,1.0f);
+        glVertex3f(0.0f,0.0f,0.0f);//Center Bottom
+        x = radius * cosf(curAngle);
+        y = radius * sinf(curAngle);
+    
+        glColor3f(0.0f, 0.0f,1.0f);
+        glVertex3f(x,y,0.0f);
+        curAngle += angle;          //Increment Angle
+  
+        x = radius * cosf(curAngle);
+        y = radius * sinf(curAngle);
 
-        glColor3f(2.0, 0.0,1.0);
-        glVertex3f(0.0,0.0,2.0);         //center base vertex at (0,0,2)
-        x = radius * cosf(curAngle);
-        y = radius * sinf(curAngle);
-        glColor3f(0.0, 2.0,1.0);
-        glVertex3f(x,y, 0.0);
-        curAngle += angle;
-        x = radius * cosf(curAngle);
-        y = radius * sinf(curAngle);
-        glColor3f(0.0, 0.0,1.0);
-        glVertex3f(x,y, 0.0);
+        glColor3f(0.0f, 0.0f,1.0f);
+        glVertex3f(x,y,0.0f);
 
         glEnd();
-    }*/
 
+    
+    }
+
+    for(i = 0; i < base_tri; i++)//Top triangles
+    {
+        glBegin(GL_TRIANGLES);
+        glColor3f(0.0f, 0.0f,1.0f);
+        glVertex3f(0.0f,0.0f,height);//Center Top
+        
+        x = radius * cosf(curAngle);
+        y = radius * sinf(curAngle);
+        
+        glColor3f(0.0f, 0.0f,1.0f);
+        glVertex3f(x,y,0.0f);
+        
+        curAngle += angle;  
+        x = radius * cosf(curAngle);
+        y = radius * sinf(curAngle);
+        
+        glColor3f(0.0f, 0.0f,1.0f);
+        glVertex3f(x,y,0.0f);
+        glEnd();
+    }
+    
 }
 
 /* Draw the various vrml scenes */

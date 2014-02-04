@@ -42,6 +42,10 @@ int vr_object;
  * that would be cumbersome to pass around.
  *************************************************************/
 
+/*Dimensions of Cone with calculated triangles*/
+ double r = 1.0; //Radius of cone
+ double h = 1.0; //height of cone
+ int n = 8; //Number of trianges in base
 
 /* The canvas's width and height, in pixels */
 int win_width = 500;
@@ -128,7 +132,7 @@ void myDisplay (void) {
 			 * This call will need to be changed to use the user-specified
 			 * parameters.  Right now, hard coded parameters are used.
 			 */
-			draw_cone_tri_calc(0.0, 0.0, 0);
+			draw_cone_tri_calc(h,r,n);
 			break;
 		case DM_VRML:
 			draw_vrml();
@@ -371,6 +375,36 @@ void myKeyHandler(unsigned char ch, int x, int y) {
 			/* Quit with exit code 0 */
 			endCanvas(0);
 			break;
+		case 'I':
+			/*Increment r*/
+			r+=0.1;
+			break;
+		case 'i':
+			/* Decrement r*/
+			if(r>0.2)
+				r-=0.1;
+			break;
+		case 'O':
+			/* Increment h*/
+			h+=0.1;
+			break;
+		case 'o':
+			/*decrement h*/
+			if(h>0.1)
+				h-=0.1;
+			break;
+		case 'P':
+			/* add a triangle*/
+			n+=1;
+			break;
+		case 'p':
+			/*remove a triangle*/
+			if(n>3)
+				n-=1;
+			break;
+		
+		
+
 
 
 		/*********************************************/
