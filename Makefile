@@ -28,3 +28,4 @@ canvas: canvas.c drawing.c drawing.h vrml.c vrml.h mouse.c mouse.h
 
 clean:
 	rm -f canvas *.o core
+	rm output.txt

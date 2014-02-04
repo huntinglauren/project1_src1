@@ -324,26 +324,58 @@ void draw_cone_tri_arrays(void) {
  */
 void draw_cone_tri_calc(double height, double radius, int base_tri) {
     /* ADD YOUR CODE HERE */
+    FILE *f = fopen("output.txt", "a+");
+    fprintf(f, "%s %d \n","base_tri: ", base_tri);
+    fprintf(f, "%s %f \n","height: ", height);
+    fprintf(f, "%s %f \n","radius: ", radius);
+    
+
     if(base_tri == 0)
         base_tri = 4;
     if(radius == 0)
         radius = 1;
     height = 2.0;
-    float angle = 90.0;    // angle for base triangles
+    float angle = 1.57079633;    // angle for base triangles
 
     //int n = base_tri *2; 
     float curAngle = 0.0;           //number of total triangles 
     GLfloat x, y = 0.0;  
    
     //blue
-     
-    int i;   
+
+    glBegin(GL_TRIANGLES);
+    glColor3f(2.0f, 0.0f,1.0f);
+    glVertex3f(0.0f,0.0f,0.0f);
+    x = radius * cosf(curAngle);
+    y = radius * sinf(curAngle);
+    fprintf(f, "%s %f \n","cos(0): ", cosf(curAngle));
+    fprintf(f, "%s %f \n","sin(0): ", sinf(curAngle));
+    fprintf(f, "%s %f \n","x: ", x);
+    fprintf(f, "%s %f \n","y: ", y);
+    glColor3f(0.0f, 0.0f,1.0f);
+    glVertex3f(radius,0.0f,0.0f);
+    curAngle += angle;
+    fprintf(f, "%s %f \n","new angle ", curAngle);
+    x = radius * cosf(curAngle);
+    y = radius * sinf(curAngle);
+    fprintf(f, "%s %f \n","cos(90): ", cosf(curAngle));
+    fprintf(f, "%s %f \n","sin(90): ", sinf(curAngle));
+    fprintf(f, "%s %f \n","x': ", x);
+    fprintf(f, "%s %f \n","y': ", y);
+    glColor3f(0.0f, 2.0f,1.0f);
+    glVertex3f(0.0f,radius,0.0f);
+
+    glEnd();
+
+    fclose(f);
+  
+   /* int i;   
     for(i=0; i < 3; i++)
     {
-        glBegin(GL_LINES);
+        glBegin(GL_LINE_STRIP);
 
         glColor3f(2.0, 0.0,1.0);
-        glVertex3f(0.0,0.0,2.0);         //center base vertex at (0,0,0)
+        glVertex3f(0.0,0.0,2.0);         //center base vertex at (0,0,2)
         x = radius * cosf(curAngle);
         y = radius * sinf(curAngle);
         glColor3f(0.0, 2.0,1.0);
@@ -355,40 +387,7 @@ void draw_cone_tri_calc(double height, double radius, int base_tri) {
         glVertex3f(x,y, 0.0);
 
         glEnd();
-    }
-
-        /* glBegin(GL_TRIANGLES);
-
-        glColor3f(1.0, 0.0,0.0);
-        glVertex3f(0.0,0.0,2.0);         //center base vertex at (0,0,0)
-        x = radius * cosf(90.0);
-        y = radius * sinf(90.0);
-        glColor3f(0.0, 1.0,0.0);
-        glVertex3f(x,y, 0.0);
-        curAngle += angle;
-        x = radius * cosf(180.0);
-        y = radius * sinf(180.0);
-        glColor3f(0.0, 0.0,0.0);
-        glVertex3f(x,y, 0.0);
-
-        glEnd();
-
-        glBegin(GL_TRIANGLES);
-
-        glColor3f(2.0, 0.0,1.0);
-        glVertex3f(0.0,0.0,2.0);         //center base vertex at (0,0,0)
-        x = radius * cosf(180.0);
-        y = radius * sinf(180.0);
-        glColor3f(0.0, 2.0,1.0);
-        glVertex3f(x,y, 0.0);
-        curAngle += angle;
-        x = radius * cosf(270.0);
-        y = radius * sinf(270.0);
-        glColor3f(0.0, 0.0,1.0);
-        glVertex3f(x,y, 0.0);
-
-        glEnd();*/
-    
+    }*/
 
 }
 
