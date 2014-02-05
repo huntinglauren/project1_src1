@@ -46,7 +46,9 @@ int vr_object;
  double r = 1.0; //Radius of cone
  double h = 1.0; //height of cone
  int n = 8; //Number of trianges in base
+/*Which vrml object are we drawing*/
 
+ int vrml = 1;
 /* The canvas's width and height, in pixels */
 int win_width = 500;
 int win_height = 500;
@@ -135,7 +137,7 @@ void myDisplay (void) {
 			draw_cone_tri_calc(h,r,n);
 			break;
 		case DM_VRML:
-			draw_vrml();
+			draw_vrml(vrml);
 			break;
 		case DM_FREE_SCENE:
 			draw_free_scene();
@@ -401,6 +403,15 @@ void myKeyHandler(unsigned char ch, int x, int y) {
 			/*remove a triangle*/
 			if(n>3)
 				n-=1;
+			break;
+		case 'v':
+			/*change vrml object*/
+			if(vrml==4)
+				vrml=1;
+			else
+			{
+				vrml++;
+			}
 			break;
 		
 		
