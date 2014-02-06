@@ -414,8 +414,8 @@ void draw_free_scene(void) {
      * glutWireTorus args: (inner radius, outer radius,
      * sides per radial section, # of radial sections)
      */
-    glColor3f(1.0f, 0.0f, 0.0f);        /* red */
-    glutWireTorus(0.1, 0.4, 10, 20);
+    glColor3f(0.0f, 1.0f, 1.0f);        /* red */
+    glutWireSphere(1.0f, 20.0f, 20.0f);
 
     /*
      * Draw a green cube at an offset of (0, 1, 0) from the center of
@@ -428,7 +428,20 @@ void draw_free_scene(void) {
     glPushMatrix();
     glTranslatef(1.0f, 0.0f, 1.0f);     /* the drawing offset */
     glColor3f(0.0f, 1.0f, 0.0f);        /* green */
-    glutWireCube(1.0f);
+    glutWireSphere(0.5f, 40.0f, 40.0f);
+    glPopMatrix();
+
+    glPushMatrix();
+    glTranslatef(-1.0f, 0.0f, 1.0f);     /* the drawing offset */
+    glColor3f(0.0f, 1.0f, 0.0f);        /* green */
+    glutWireSphere(0.5f, 40.0f, 40.0f);
+    glPopMatrix();
+
+    glPushMatrix();
+    glTranslatef(0.0f, 1.0f, 0.0f);     /* the drawing offset */
+    glRotatef(90.0f, 1.0f, 0.0f, 0.0f);
+    glColor3f(1.0f, 0.0f, 0.0f);        /* green */
+    glutSolidTorus(0.1f, 0.2f, 20.0f, 40.0f);
     glPopMatrix();
 }
 
