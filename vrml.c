@@ -167,7 +167,7 @@ GLint v_pyramid_indices[] = {
  {
  	int num_indices;
     int i;
-    int index1, index2, index3, index4;
+    int index;
 
     num_indices = sizeof(v_cube_indices) / sizeof(GLuint);
 
@@ -175,31 +175,22 @@ GLint v_pyramid_indices[] = {
      * Loop over all quads that need to be draen.
      * Step i by 4 because there are 4 vertices per quad.
      */
-    for (i = 0; i < num_indices; i += 5) {
-        /*
-         * Find the index into the vertex array.  The value
-         * in the cube_indices array refers to the index
-         * of the ordered triples, not the index for the
-         * actual GLfloats that comprise the cube_vertices array.
-         * Thus, we need to multiple by 3 to ge the real index.
-         */
-        index1 = v_cube_indices[i]*3;
-        index2 = v_cube_indices[i+1]*3;
-        index3 = v_cube_indices[i+2]*3;
-        index4 = v_cube_indices[i+3]*3;
-
-        glBegin(GL_LINE_LOOP);
-
-        /* All arguments here are pointers */
-        glColor3f(1.0f, 1.0f, 0.0f);
-        glVertex3fv( &(v_cube_vertices[index1]) );
-        glVertex3fv( &(v_cube_vertices[index2]) );
-        glVertex3fv( &(v_cube_vertices[index3]) );
-        glVertex3fv( &(v_cube_vertices[index4]) );
-
-
-        glEnd();
+    glBegin(GL_LINE_LOOP);
+    for (i = 0; i < num_indices; i ++) {
+        if(v_cube_indices[i]==-1)
+        {
+            glEnd();
+            glBegin(GL_LINE_LOOP);
+        }
+        else
+        {
+            index = v_cube_indices[i]*3;
+            /* All arguments here are pointers */
+            glColor3f(1.0f, 1.0f, 0.0f);
+            glVertex3fv( &(v_cube_vertices[index]) );
+        }
     }
+    glEnd();
 } 
 
 
@@ -207,7 +198,7 @@ void draw_vrml_dodecahedron(void)
 {
 	int num_indices;
     int i;
-    int index1, index2, index3, index4, index5;
+    int index;
 
     num_indices = sizeof(v_dodeca_indices) / sizeof(GLuint);
 
@@ -215,103 +206,83 @@ void draw_vrml_dodecahedron(void)
      * Loop over all quads that need to be draen.
      * Step i by 4 because there are 4 vertices per quad.
      */
-    for (i = 0; i < num_indices; i += 6) {
-        /*
-         * Find the index into the vertex array.  The value
-         * in the cube_indices array refers to the index
-         * of the ordered triples, not the index for the
-         * actual GLfloats that comprise the cube_vertices array.
-         * Thus, we need to multiple by 3 to ge the real index.
-         */
-        index1 = v_dodeca_indices[i]*3;
-        index2 = v_dodeca_indices[i+1]*3;
-        index3 = v_dodeca_indices[i+2]*3;
-        index4 = v_dodeca_indices[i+3]*3;
-        index5 = v_dodeca_indices[i+4]*3;
-      
-
-        glBegin(GL_LINE_LOOP);
-
-        /* All arguments here are pointers */
-        glColor3f(1.0f, 1.0f, 0.0f);
-        glVertex3fv( &(v_dodeca_vertices[index1]) );
-        glVertex3fv( &(v_dodeca_vertices[index2]) );
-        glVertex3fv( &(v_dodeca_vertices[index3]) );
-        glVertex3fv( &(v_dodeca_vertices[index4]) );
-        glVertex3fv( &(v_dodeca_vertices[index5]) );
-        
-
-        glEnd();
+    glBegin(GL_LINE_LOOP);
+    for (i = 0; i < num_indices; i ++) {
+        if(v_dodeca_indices[i]==-1)
+        {
+            glEnd();
+            glBegin(GL_LINE_LOOP);
+        }
+        else
+        {
+            index = v_dodeca_indices[i]*3;
+            /* All arguments here are pointers */
+            glColor3f(1.0f, 1.0f, 0.0f);
+            glVertex3fv( &(v_dodeca_vertices[index]) );
+        }
     }
+    glEnd();
 }
 
 void draw_vrml_icosahedron(void)
 {
-	int num_indices;
+    int num_indices;
     int i;
-    int index1, index2, index3;
+    int index;
 
-    num_indices = sizeof(v_dodeca_indices) / sizeof(GLuint);
+    num_indices = sizeof(v_icosa_indices) / sizeof(GLuint);
 
     /*
      * Loop over all quads that need to be draen.
      * Step i by 4 because there are 4 vertices per quad.
      */
-    for (i = 0; i < num_indices; i += 4) {
-        /*
-         * Find the index into the vertex array.  The value
-         * in the cube_indices array refers to the index
-         * of the ordered triples, not the index for the
-         * actual GLfloats that comprise the cube_vertices array.
-         * Thus, we need to multiple by 3 to ge the real index.
-         */
-        index1 = v_icosa_indices[i]*3;
-        index2 = v_icosa_indices[i+1]*3;
-        index3 = v_icosa_indices[i+2]*3;
-        
-        glBegin(GL_LINE_LOOP);
-
-        /* All arguments here are pointers */
-        glColor3f(1.0f, 1.0f, 0.0f);
-        glVertex3fv( &(v_icosa_vertices[index1]) );
-        glVertex3fv( &(v_icosa_vertices[index2]) );
-        glVertex3fv( &(v_icosa_vertices[index3]) );
-        
-        glEnd();
+    glBegin(GL_LINE_LOOP);
+    for (i = 0; i < num_indices; i ++) {
+        if(v_icosa_indices[i]==-1)
+        {
+            glEnd();
+            glBegin(GL_LINE_LOOP);
+        }
+        else
+        {
+            index = v_icosa_indices[i]*3;
+            /* All arguments here are pointers */
+            glColor3f(1.0f, 1.0f, 0.0f);
+            glVertex3fv( &(v_icosa_vertices[index]) );
+        }
     }
+    glEnd();
 }
 
 
 void draw_vrml_pyramid(void)
 {
-	int num_indices;
+    int num_indices;
     int i;
-    int index1, index2, index3;
+    int index;
 
     num_indices = sizeof(v_pyramid_indices) / sizeof(GLuint);
 
-    for (i = 0; i < num_indices; i += 4) {
-        /*
-         * Find the index into the vertex array.  The value
-         * in the cube_indices array refers to the index
-         * of the ordered triples, not the index for the
-         * actual GLfloats that comprise the cube_vertices array.
-         * Thus, we need to multiple by 3 to ge the real index.
-         */
-        index1 = v_pyramid_indices[i]*3;
-        index2 = v_pyramid_indices[i+1]*3;
-        index3 = v_pyramid_indices[i+2]*3;
-        
-        glBegin(GL_LINE_LOOP);
-
-        /* All arguments here are pointers */
-        glColor3f(1.0f, 1.0f, 0.0f);
-        glVertex3fv( &(v_pyramid_vertices[index1]) );
-        glVertex3fv( &(v_pyramid_vertices[index2]) );
-        glVertex3fv( &(v_pyramid_vertices[index3]) );
-        
-        glEnd();
+    /*
+     * Loop over all quads that need to be draen.
+     * Step i by 4 because there are 4 vertices per quad.
+     */
+    glBegin(GL_LINE_LOOP);
+    for (i = 0; i < num_indices; i ++) {
+        if(v_pyramid_indices[i]==-1)
+        {
+            glEnd();
+            glBegin(GL_LINE_LOOP);
+        }
+        else
+        {
+            index = v_pyramid_indices[i]*3;
+            /* All arguments here are pointers */
+            glColor3f(1.0f, 1.0f, 0.0f);
+            glVertex3fv( &(v_pyramid_vertices[index]) );
+        }
     }
+    glEnd();
 }
 
 /* end of vrml.c */

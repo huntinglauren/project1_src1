@@ -458,7 +458,7 @@ void print_disp_mode( void ) {
             printf("Display Mode: Cone using calculated triangles\n");
             break;
         case DM_VRML:
-            printf("Display Mode: VRML objects\n");
+            printf("Display Mode: VRML objects\ndrawing Cube\n");
             break;
         case DM_FREE_SCENE:
             printf("Display Mode: Freeform scene\n");
