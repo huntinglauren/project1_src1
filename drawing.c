@@ -385,23 +385,19 @@ void draw_vrml(int shape) {
     /* NOTE: you should be calling a function or functions in vrml.c */
     if(shape==1)
     {    
-      draw_vrml_cube();
-      printf("drawing Cube \n");
+      draw_vrml_cube();      
     }
     if(shape==2)
     {
       draw_vrml_dodecahedron();
-      printf("drawing Dodecahedron \n");
     }
     if(shape == 3)
     {    
       draw_vrml_icosahedron();
-       printf("drawing Iscoahedron \n");
     }
     if(shape == 4)
     {    
       draw_vrml_pyramid();
-      printf("drawing Pyramid \n");
     }
 
 }

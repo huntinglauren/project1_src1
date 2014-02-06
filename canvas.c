@@ -412,6 +412,14 @@ void myKeyHandler(unsigned char ch, int x, int y) {
 			{
 				vrml++;
 			}
+			if(vrml == 1)
+				printf("drawing Cube \n");
+			if(vrml == 2)
+				printf("drawing Dodecahedron \n");
+			if(vrml == 3)  
+				printf("drawing Iscoahedron \n");
+			if(vrml == 4)
+				printf("drawing Pyramid \n");
 			break;
 		
 		

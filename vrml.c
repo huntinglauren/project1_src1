@@ -290,10 +290,6 @@ void draw_vrml_pyramid(void)
 
     num_indices = sizeof(v_pyramid_indices) / sizeof(GLuint);
 
-    /*
-     * Loop over all quads that need to be draen.
-     * Step i by 4 because there are 4 vertices per quad.
-     */
     for (i = 0; i < num_indices; i += 4) {
         /*
          * Find the index into the vertex array.  The value
